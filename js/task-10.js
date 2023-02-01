@@ -13,7 +13,7 @@ const destroyBtn = document.querySelector('[data-destroy]');
 // ==========Створення блоків=============
 
 let boxesArr = [];
-let size = 20;
+const size = 30;
 
 // слухач кнопки створення блоків
 createBtn.addEventListener('click', () => {
@@ -32,16 +32,16 @@ createBtn.addEventListener('click', () => {
   // очистка масуву з шаблоном створюваних елементів і скидання значення в інпуті, скидання кінцевого розміру бокса
   boxesArr.length = 0;
   inputQuantity.value = '';
-  size = 20;
+  // size = 30;
 });
 
 // функція створення боксів
 function createBoxes(amount) {
   // створює масив шаблону з необхідною кількістю елементів
-  for (let i = 1; i <= amount; i += 1) {
-    size += 10;
+  for (let i = 0; i <= amount - 1; i += 1) {
+    const boxSize = size + 10 * i;
     boxesArr.push(
-      `<div class="box" style="display: inline-block; background-color: ${getRandomHexColor()}; width: ${size}px; height: ${size}px;"></div>`
+      `<div class="box" style="display: inline-block; background-color: ${getRandomHexColor()}; width: ${boxSize}px; height: ${boxSize}px;"></div>`
     );
   }
   // додаємо елементи в розмітку
@@ -55,11 +55,14 @@ destroyBtn.addEventListener('click', destroyBoxes);
 
 // функція очищення
 function destroyBoxes() {
+  // оптимізація(очищення за допомогою innerHTML)
+  boxOfElements.innerHTML = '';
+
   // пошук всіх елементів з необхідним класом
-  const destroyArr = document.querySelectorAll('.box');
+  // const destroyArr = document.querySelectorAll('.box');
   // перебір масиву елементів з необхідним класом
-  for (let element of destroyArr) {
-    // видалення кожного елемента розмітки
-    element.remove();
-  }
+  // for (let element of destroyArr) {
+  // видалення кожного елемента розмітки
+  // element.remove();
+  // }
 }
